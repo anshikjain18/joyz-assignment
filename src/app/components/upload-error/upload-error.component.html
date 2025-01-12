@@ -1,0 +1,38 @@
+<div class="upload-section">
+  <div class="max-width-container upload-container">
+    <div
+      class="upload-box"
+      [class.drag-over]="isDragOver"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave()"
+      (drop)="onDrop($event)"
+      (click)="fileInput.click()"
+    >
+      <input type="file" #fileInput hidden (change)="onFileSelected($event)" />
+      <p>{{ uploadBoxMessage }}</p>
+    </div>
+    <div></div>
+  </div>
+</div>
+<div class="errors-section">
+  <div class="max-width-container errors-container">
+    <h5 class="error-heading">
+      <strong>
+        <span class="error-red">&#9888; </span>Errors for org
+        <span class="filename">{{ fileName }}</span
+        >:
+      </strong>
+    </h5>
+    <div class="error-list">
+      @if (isFileChecked) { @for (error of errors; track $index) {
+      <li>
+        {{ error }}
+      </li>
+      } @empty {
+      <p>No errors, the org {{ fileName }} is valid.</p>
+      } } @else {
+      <p>Upload a CSV org file to check for errors.</p>
+      }
+    </div>
+  </div>
+</div>
